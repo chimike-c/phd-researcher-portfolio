@@ -31,12 +31,43 @@ export const education = [
   },
 ]
 
+export const developmentPrograms = [
+  {
+    title: 'College & University Faculty Preparation Certification Program',
+    organization: 'Howard University',
+    years: 'Jan 2026–Present',
+    detail:
+      'Formal training in higher-education pedagogy, curriculum design, assessment, inclusive teaching, and academic career preparation.',
+  },
+]
+
+export const honors = [
+  {
+    kind: 'honor' as const,
+    title: 'Ernest E. Just–Percy L. Julian Graduate Research Fellowship',
+    organization: 'Howard University',
+    years: '2024–Present',
+  },
+  {
+    kind: 'affiliation' as const,
+    title: 'Tau Beta Pi Engineering Honor Society',
+    organization: 'Member',
+    years: '2026',
+  },
+  {
+    kind: 'affiliation' as const,
+    title: 'Nigerian Society of Chemical Engineers',
+    organization: 'Member',
+    years: null,
+  },
+]
+
 export const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Research', href: '#research' },
   { label: 'Teaching', href: '#teaching' },
   { label: 'Service & Leadership', href: '#service' },
-  { label: 'Professional Development', href: '#development' },
+  { label: 'Development & Honors', href: '#development' },
   { label: 'CV', href: '#cv' },
 ]
