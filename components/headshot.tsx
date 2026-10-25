@@ -2,8 +2,7 @@ import Image from 'next/image'
 import { ExternalLink as Linkedin, Mail, UserRound } from 'lucide-react'
 import { profile } from '@/lib/profile'
 
-/** Set to "/images/headshot.jpg" after adding the photo to /public/images. */
-const HEADSHOT_SRC: string | null = null
+const HEADSHOT_SRC: string | null = '/images/headshot.jpg'
 
 export function Headshot() {
   return (

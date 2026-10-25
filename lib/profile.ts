@@ -6,10 +6,30 @@ export const profile = {
   affiliation: 'PhD Researcher, Howard University',
   department: 'Biomedical & Chemical Engineering',
   email: 'chimikechimere@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/divinegift-chimere-734118143/',
-  /** Set to a file path (e.g. "/cv/divinegift-chimere-cv.pdf") once the CV is uploaded to /public. */
-  cvUrl: null as string | null,
+  linkedin: 'https://www.linkedin.com/in/divine-chimere-734118143',
+  cvUrl: '/Divinegift-Chimere-CV.pdf' as string | null,
 }
+
+export const education = [
+  {
+    degree: 'PhD, Biomedical & Chemical Engineering',
+    school: 'Howard University, Washington, DC',
+    years: '2024–Present',
+    detail: 'GPA 4.0/4.0 · Ernest E. Just–Percy L. Julian Graduate Research Fellow',
+  },
+  {
+    degree: 'Master of Engineering, Chemical Engineering',
+    school: 'University of Ottawa, Canada',
+    years: '2020–2022',
+    detail: 'GPA 3.87/4.0 · Distinction in all graduate courses',
+  },
+  {
+    degree: 'Bachelor of Engineering, Chemical Engineering',
+    school: 'Covenant University, Nigeria',
+    years: '2013–2018',
+    detail: 'GPA 4.47/5.0 · Diploma in Leadership Development',
+  },
+]
 
 export const navItems = [
   { label: 'Home', href: '#home' },

@@ -8,7 +8,7 @@ import {
   Users,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { profile } from '@/lib/profile'
+import { education, profile } from '@/lib/profile'
 
 type Pillar = {
   id: string
@@ -138,6 +138,20 @@ export function AboutSection() {
             My broader interests include process optimization, engineering education, and
             translating research into practical applications.
           </p>
+          <ol className="mt-2 flex flex-col divide-y divide-border border-y border-border">
+            {education.map((item) => (
+              <li key={item.degree} className="flex flex-col gap-1 py-5 md:flex-row md:justify-between md:gap-6">
+                <div>
+                  <h3 className="font-serif text-lg font-semibold text-primary">{item.degree}</h3>
+                  <p className="text-sm text-foreground">{item.school}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{item.detail}</p>
+                </div>
+                <span className="shrink-0 text-sm font-medium text-muted-foreground md:pt-1">
+                  {item.years}
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
@@ -156,6 +170,13 @@ export function DevelopmentSection() {
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">
             Workshops, training, and reflective accounts of the experiences preparing me for a
             career in research, industry, and higher education.
+          </p>
+          <p className="mt-4 max-w-3xl leading-relaxed text-foreground">
+            <span className="font-semibold text-primary">
+              College &amp; University Faculty Preparation Certification Program
+            </span>{' '}
+            · Howard University · Jan 2026–Present — formal training in higher-education pedagogy,
+            curriculum design, assessment, inclusive teaching, and academic career preparation.
           </p>
         </div>
       </div>
