@@ -1,5 +1,7 @@
 import {
   ArrowRight,
+  Award,
+  BadgeCheck,
   Download,
   FlaskConical,
   GraduationCap,
@@ -8,7 +10,7 @@ import {
   Users,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { education, profile } from '@/lib/profile'
+import { developmentPrograms, education, honors, profile } from '@/lib/profile'
 
 type Pillar = {
   id: string
@@ -160,24 +162,84 @@ export function AboutSection() {
 
 export function DevelopmentSection() {
   return (
-    <section id="development" className="scroll-mt-20 border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-14 md:flex-row md:items-center md:gap-10">
-        <span className="flex size-12 shrink-0 items-center justify-center rounded-md bg-accent text-primary">
-          <Sprout className="size-6" aria-hidden="true" />
-        </span>
-        <div>
-          <h2 className="font-serif text-2xl font-semibold text-primary">Professional Development</h2>
-          <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">
-            Workshops, training, and reflective accounts of the experiences preparing me for a
-            career in research, industry, and higher education.
-          </p>
-          <p className="mt-4 max-w-3xl leading-relaxed text-foreground">
-            <span className="font-semibold text-primary">
-              College &amp; University Faculty Preparation Certification Program
-            </span>{' '}
-            · Howard University · Jan 2026–Present — formal training in higher-education pedagogy,
-            curriculum design, assessment, inclusive teaching, and academic career preparation.
-          </p>
+    <section
+      id="development"
+      aria-labelledby="development-heading"
+      className="scroll-mt-20 border-t border-border"
+    >
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+        <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
+          Growth &amp; Recognition
+        </p>
+        <h2
+          id="development-heading"
+          className="mt-2 font-serif text-3xl font-semibold text-primary md:text-4xl"
+        >
+          Professional Development &amp; Honors
+        </h2>
+        <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
+          Training, recognition, and professional memberships that reflect my preparation for a
+          career in research, industry, and higher education.
+        </p>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          <article className="flex flex-col rounded-xl border border-border bg-card p-7">
+            <div className="flex items-center gap-3">
+              <span className="flex size-10 items-center justify-center rounded-md bg-accent text-primary">
+                <Sprout className="size-5" aria-hidden="true" />
+              </span>
+              <h3 className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
+                Professional Development
+              </h3>
+            </div>
+            <ul className="mt-6 flex flex-col divide-y divide-border">
+              {developmentPrograms.map((item) => (
+                <li key={item.title} className="py-4 first:pt-0 last:pb-0">
+                  <p className="font-serif text-lg leading-snug font-semibold text-primary">
+                    {item.title}
+                  </p>
+                  <p className="mt-1 text-sm text-foreground">
+                    {item.organization} · {item.years}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {item.detail}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="flex flex-col rounded-xl border border-border bg-card p-7">
+            <div className="flex items-center gap-3">
+              <span className="flex size-10 items-center justify-center rounded-md bg-accent text-primary">
+                <Award className="size-5" aria-hidden="true" />
+              </span>
+              <h3 className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
+                Honors &amp; Professional Affiliations
+              </h3>
+            </div>
+            <ul className="mt-6 flex flex-col divide-y divide-border">
+              {honors.map((item) => {
+                const Icon = item.kind === 'honor' ? Award : BadgeCheck
+                return (
+                  <li key={item.title} className="flex gap-3 py-4 first:pt-0 last:pb-0">
+                    <Icon className="mt-1 size-4 shrink-0 text-primary" aria-hidden="true" />
+                    <div className="flex flex-1 flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
+                      <div>
+                        <p className="font-medium leading-snug text-foreground">{item.title}</p>
+                        <p className="text-sm text-muted-foreground">{item.organization}</p>
+                      </div>
+                      {item.years ? (
+                        <span className="shrink-0 text-sm font-medium text-muted-foreground">
+                          {item.years}
+                        </span>
+                      ) : null}
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </article>
         </div>
       </div>
     </section>
