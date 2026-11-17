@@ -1,21 +1,15 @@
 import Link from 'next/link'
 import {
   ArrowLeft,
+  Award,
   BookOpen,
   Briefcase,
-  Download,
   FileText,
-  FlaskConical,
   Heart,
-  Lightbulb,
-  MessageCircle,
   Quote,
   Sprout,
-  Users,
 } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
 import { developmentPrograms, profile } from '@/lib/profile'
-import type { Principle } from '@/lib/teaching'
 import {
   evidence,
   experience,
@@ -24,13 +18,6 @@ import {
   reflections,
   teachingIntro,
 } from '@/lib/teaching'
-
-const principleIcons: Record<Principle['icon'], LucideIcon> = {
-  lightbulb: Lightbulb,
-  flask: FlaskConical,
-  users: Users,
-  message: MessageCircle,
-}
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -155,8 +142,8 @@ export function EvidenceSection() {
           Selected Teaching &amp; Mentorship Evidence
         </h2>
         <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
-          Examples that show the substance behind each role. Available samples can be opened below;
-          the rest will be added as they are ready. Student names are removed from all materials.
+          Examples that show the substance behind each role. Materials are being prepared and will
+          be linked here as they are ready.
         </p>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -169,42 +156,17 @@ export function EvidenceSection() {
                 <span className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
                   {item.area}
                 </span>
-                <span
-                  className={
-                    item.files
-                      ? 'shrink-0 rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground'
-                      : 'shrink-0 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground'
-                  }
-                >
-                  {item.files ? 'Available' : 'Coming soon'}
+                <span className="shrink-0 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+                  Coming soon
                 </span>
               </div>
               <h3 className="mt-4 font-serif text-lg leading-snug font-semibold text-primary">
                 {item.title}
               </h3>
               <p className="mt-1 text-sm font-medium text-muted-foreground italic">{item.type}</p>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
-              {item.files ? (
-                <ul className="mt-5 flex flex-col gap-2 border-t border-border pt-5">
-                  {item.files.map((f) => (
-                    <li key={f.href}>
-                      <a
-                        href={f.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
-                      >
-                        <Download className="size-4" aria-hidden="true" />
-                        {f.label}
-                        <span className="font-normal text-muted-foreground">({f.meta})</span>
-                        <span className="sr-only">, opens in a new tab</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
             </article>
           ))}
         </div>
@@ -247,25 +209,22 @@ export function PhilosophySection() {
           Teaching &amp; Mentorship Philosophy
         </h2>
         <p className="mt-5 max-w-3xl font-serif text-xl leading-snug text-pretty text-foreground md:text-2xl">
-          {philosophy.statement}
+          {philosophy.lead}
         </p>
 
-        <ul className="mt-10 grid gap-6 md:grid-cols-2">
-          {philosophy.principles.map((p) => {
-            const Icon = principleIcons[p.icon]
-            return (
-              <li key={p.title} className="rounded-xl border border-border bg-card p-7">
-                <span className="flex size-10 items-center justify-center rounded-md bg-accent text-primary">
-                  <Icon className="size-5" aria-hidden="true" />
-                </span>
-                <h3 className="mt-5 font-serif text-lg leading-snug font-semibold text-primary">
-                  {p.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-              </li>
-            )
-          })}
-        </ul>
+        <ol className="mt-10 grid gap-6 md:grid-cols-2">
+          {philosophy.principles.map((p, i) => (
+            <li key={p.title} className="rounded-xl border border-border bg-card p-7">
+              <span className="font-serif text-sm font-semibold text-muted-foreground">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="mt-2 font-serif text-lg leading-snug font-semibold text-primary">
+                {p.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )
@@ -311,6 +270,10 @@ export function TeachingDevelopmentSection() {
               </div>
             </li>
           ))}
+          <li className="flex gap-4 rounded-xl border border-dashed border-border p-7 text-sm text-muted-foreground italic">
+            <Award className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
+            [Add other teaching workshops, certificates, or training here]
+          </li>
         </ul>
       </div>
     </section>
