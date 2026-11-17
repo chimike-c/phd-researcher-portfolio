@@ -40,7 +40,7 @@ export const experience: ExperienceEntry[] = [
     id: 'beta-learning',
     role: 'Co-Founder & Educational Program Lead',
     organization: 'Beta-Learning',
-    period: '[Start Year]–Present',
+    period: '2022–Present',
     summary:
       'Lead the development and coordination of personalized tutoring, academic mentorship, and educational enrichment programs supporting learners across elementary, secondary, and postsecondary levels.',
     details: [
@@ -52,15 +52,23 @@ export const experience: ExperienceEntry[] = [
   },
 ]
 
+export type EvidenceFile = {
+  label: string
+  href: string
+  meta: string
+}
+
 export type EvidenceItem = {
   area: string
   title: string
   type: string
   description: string
+  // Add `files` once a sample is ready; the card switches from "Coming soon"
+  // to "Available" automatically. Files live in /public/teaching/.
+  files?: EvidenceFile[]
 }
 
-// Planned portfolio entries. Add an `href` (PDF, case study, etc.) to an item
-// once its material is ready, and update the card to link to it.
+// Student names are removed from every published file.
 export const evidence: EvidenceItem[] = [
   {
     area: 'Laboratory Instruction',
@@ -74,14 +82,33 @@ export const evidence: EvidenceItem[] = [
     title: 'Instructional Design & Learning Activities',
     type: 'Sample educational activity',
     description:
-      'Selected instructional materials from academic enrichment programs, including high school mathematics practice activities, persuasive writing assignments, and structured STEM learning plans.',
+      'An interactive tutoring session, “From Classroom to Car,” that connects Statics, Calculus III, Thermodynamics, and Physics II to the systems of a real vehicle. It combines a quick check-in, worked examples, challenge questions, a case problem, and an exit activity.',
+    files: [
+      {
+        label: 'Session slides',
+        href: '/teaching/instructional-session-classroom-to-car.pdf',
+        meta: 'PDF · 20 slides',
+      },
+    ],
   },
   {
     area: 'Academic Mentorship',
     title: 'Personalized Learning & Academic Mentorship',
     type: 'Program framework / learning roadmap',
     description:
-      'Examples of structured mentorship and academic support programs designed to help students establish learning goals, strengthen academic skills, and develop greater independence.',
+      'A semester game plan and a weekly journal template for an engineering undergraduate. They give students a Preview → Learn → Practice → Connect study method, weekly check-ins, and prompts to name exactly what they do not yet understand, so they can set goals and work more independently.',
+    files: [
+      {
+        label: 'Semester game plan',
+        href: '/teaching/academic-game-plan-sample.pdf',
+        meta: 'PDF · 3 pages',
+      },
+      {
+        label: 'Engineering connections journal',
+        href: '/teaching/engineering-connections-journal-template.pdf',
+        meta: 'PDF · 3 pages',
+      },
+    ],
   },
   {
     area: 'Progress Monitoring',
@@ -106,28 +133,35 @@ export const reflections = [
 ]
 
 export type Principle = {
+  icon: 'lightbulb' | 'flask' | 'users' | 'message'
   title: string
   body: string
 }
 
 export const philosophy = {
-  lead: 'I teach with the belief that students learn best when they feel supported, challenged, and capable of contributing.',
+  // TODO: replace with your shorter philosophy statement (one short paragraph).
+  statement:
+    'I teach with the belief that students learn best when they feel supported, challenged, and capable of contributing.',
   principles: [
     {
-      title: 'Inclusive and engaging learning environments',
-      body: 'I aim to build STEM learning spaces where every student feels welcome to ask questions, make mistakes, and try again. In the laboratory, that means clear expectations, approachable guidance, and room for students to learn from one another.',
+      icon: 'lightbulb',
+      title: 'Curiosity & Critical Thinking',
+      body: 'Encouraging questions, reasoning, and independent problem-solving.',
     },
     {
-      title: 'Confidence and technical understanding',
-      body: 'Students build confidence when they understand why a method works, not only how to run it. I try to connect procedures to underlying principles so that students can explain their results and carry their understanding into new problems.',
+      icon: 'flask',
+      title: 'Theory into Practice',
+      body: 'Connecting academic concepts with experiments and real-world applications.',
     },
     {
-      title: 'Practical problem-solving rooted in real challenges',
-      body: 'My research on sustainable processes and separation technologies shapes how I teach. I like to link course concepts to real engineering problems, so that students see how fundamentals support practical solutions.',
+      icon: 'users',
+      title: 'Inclusive & Personalized Learning',
+      body: 'Recognizing different learning needs and supporting meaningful participation.',
     },
     {
-      title: 'Mentorship beyond the classroom',
-      body: 'Good teaching continues in office hours, tutoring sessions, and conversations about careers. I see mentorship as helping students develop academic skills and a sense of direction.',
+      icon: 'message',
+      title: 'Mentorship & Constructive Feedback',
+      body: 'Helping students build confidence, reflect on progress, and grow.',
     },
   ] satisfies Principle[],
 }
