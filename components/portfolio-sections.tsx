@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import {
   ArrowRight,
   Award,
@@ -19,6 +20,7 @@ type Pillar = {
   title: string
   description: string
   linkLabel: string
+  href?: string
 }
 
 const pillars: Pillar[] = [
@@ -39,6 +41,7 @@ const pillars: Pillar[] = [
     description:
       'I am committed to creating engaging, inclusive, and supportive STEM learning environments. Through undergraduate laboratory instruction, academic mentorship, and educational program development, I aim to help students build confidence, strengthen technical understanding, and develop practical problem-solving skills.',
     linkLabel: 'Explore Teaching',
+    href: '/teaching',
   },
   {
     id: 'service',
@@ -63,7 +66,7 @@ export function PillarsSection() {
         </h2>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {pillars.map(({ id, icon: Icon, label, title, description, linkLabel }) => (
+          {pillars.map(({ id, icon: Icon, label, title, description, linkLabel, href }) => (
             <article
               key={id}
               id={id}
@@ -81,13 +84,13 @@ export function PillarsSection() {
                 {title}
               </h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
-              <a
-                href={`#${id}`}
+              <Link
+                href={href ?? `#${id}`}
                 className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4"
               >
                 {linkLabel}
                 <ArrowRight className="size-4" aria-hidden="true" />
-              </a>
+              </Link>
             </article>
           ))}
         </div>

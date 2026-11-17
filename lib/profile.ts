@@ -63,11 +63,11 @@ export const honors = [
 ]
 
 export const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Research', href: '#research' },
-  { label: 'Teaching', href: '#teaching' },
-  { label: 'Service & Leadership', href: '#service' },
-  { label: 'Development & Honors', href: '#development' },
-  { label: 'CV', href: '#cv' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/#about' },
+  { label: 'Research', href: '/#research' },
+  { label: 'Teaching', href: '/teaching' },
+  { label: 'Service & Leadership', href: '/#service' },
+  { label: 'Development & Honors', href: '/#development' },
+  { label: 'CV', href: '/#cv' },
 ]
