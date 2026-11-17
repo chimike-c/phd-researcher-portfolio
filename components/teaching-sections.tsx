@@ -1,20 +1,36 @@
 import Link from 'next/link'
 import {
   ArrowLeft,
-  Award,
   BookOpen,
   Briefcase,
+  Download,
   FileText,
+  FlaskConical,
   Heart,
+  Lightbulb,
+  MessageCircle,
+  Quote,
   Sprout,
+  Users,
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { developmentPrograms, profile } from '@/lib/profile'
+import type { Principle } from '@/lib/teaching'
 import {
+  evidence,
   experience,
   philosophy,
   portfolioMaterials,
+  reflections,
   teachingIntro,
 } from '@/lib/teaching'
+
+const principleIcons: Record<Principle['icon'], LucideIcon> = {
+  lightbulb: Lightbulb,
+  flask: FlaskConical,
+  users: Users,
+  message: MessageCircle,
+}
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -123,6 +139,95 @@ export function ExperienceSection() {
   )
 }
 
+export function EvidenceSection() {
+  return (
+    <section
+      id="evidence"
+      aria-labelledby="evidence-heading"
+      className="scroll-mt-20 border-t border-border"
+    >
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+        <Eyebrow>Evidence</Eyebrow>
+        <h2
+          id="evidence-heading"
+          className="mt-2 font-serif text-3xl font-semibold text-primary md:text-4xl"
+        >
+          Selected Teaching &amp; Mentorship Evidence
+        </h2>
+        <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
+          Examples that show the substance behind each role. Available samples can be opened below;
+          the rest will be added as they are ready. Student names are removed from all materials.
+        </p>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {evidence.map((item) => (
+            <article
+              key={item.title}
+              className="flex flex-col rounded-xl border border-border bg-card p-7"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
+                  {item.area}
+                </span>
+                <span
+                  className={
+                    item.files
+                      ? 'shrink-0 rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground'
+                      : 'shrink-0 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground'
+                  }
+                >
+                  {item.files ? 'Available' : 'Coming soon'}
+                </span>
+              </div>
+              <h3 className="mt-4 font-serif text-lg leading-snug font-semibold text-primary">
+                {item.title}
+              </h3>
+              <p className="mt-1 text-sm font-medium text-muted-foreground italic">{item.type}</p>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                {item.description}
+              </p>
+              {item.files ? (
+                <ul className="mt-5 flex flex-col gap-2 border-t border-border pt-5">
+                  {item.files.map((f) => (
+                    <li key={f.href}>
+                      <a
+                        href={f.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
+                      >
+                        <Download className="size-4" aria-hidden="true" />
+                        {f.label}
+                        <span className="font-normal text-muted-foreground">({f.meta})</span>
+                        <span className="sr-only">, opens in a new tab</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </article>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-serif text-2xl font-semibold text-primary">Reflections</h3>
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          {reflections.map((r) => (
+            <figure key={r.role} className="rounded-xl bg-secondary p-7">
+              <Quote className="size-5 text-primary/60" aria-hidden="true" />
+              <blockquote className="mt-3 font-serif text-base leading-relaxed text-foreground">
+                {r.text}
+              </blockquote>
+              <figcaption className="mt-4 text-sm text-muted-foreground">
+                {r.role}, {r.organization}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export function PhilosophySection() {
   return (
     <section
@@ -142,22 +247,25 @@ export function PhilosophySection() {
           Teaching &amp; Mentorship Philosophy
         </h2>
         <p className="mt-5 max-w-3xl font-serif text-xl leading-snug text-pretty text-foreground md:text-2xl">
-          {philosophy.lead}
+          {philosophy.statement}
         </p>
 
-        <ol className="mt-10 grid gap-6 md:grid-cols-2">
-          {philosophy.principles.map((p, i) => (
-            <li key={p.title} className="rounded-xl border border-border bg-card p-7">
-              <span className="font-serif text-sm font-semibold text-muted-foreground">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 className="mt-2 font-serif text-lg leading-snug font-semibold text-primary">
-                {p.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-            </li>
-          ))}
-        </ol>
+        <ul className="mt-10 grid gap-6 md:grid-cols-2">
+          {philosophy.principles.map((p) => {
+            const Icon = principleIcons[p.icon]
+            return (
+              <li key={p.title} className="rounded-xl border border-border bg-card p-7">
+                <span className="flex size-10 items-center justify-center rounded-md bg-accent text-primary">
+                  <Icon className="size-5" aria-hidden="true" />
+                </span>
+                <h3 className="mt-5 font-serif text-lg leading-snug font-semibold text-primary">
+                  {p.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </section>
   )
@@ -203,10 +311,6 @@ export function TeachingDevelopmentSection() {
               </div>
             </li>
           ))}
-          <li className="flex gap-4 rounded-xl border border-dashed border-border p-7 text-sm text-muted-foreground italic">
-            <Award className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
-            [Add other teaching workshops, certificates, or training here]
-          </li>
         </ul>
       </div>
     </section>
@@ -221,7 +325,7 @@ export function PortfolioMaterialsSection() {
       className="scroll-mt-20 border-t border-border bg-card"
     >
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <Eyebrow>Evidence</Eyebrow>
+        <Eyebrow>Coming Next</Eyebrow>
         <h2
           id="materials-heading"
           className="mt-2 font-serif text-3xl font-semibold text-primary md:text-4xl"
@@ -229,11 +333,11 @@ export function PortfolioMaterialsSection() {
           Teaching Portfolio Materials
         </h2>
         <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
-          This portfolio is growing alongside my training. Supporting materials will be added here as
+          This portfolio is growing alongside my training. Additional documents will be added here as
           they are completed.
         </p>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
           {portfolioMaterials.map((m) => (
             <article
               key={m.title}
