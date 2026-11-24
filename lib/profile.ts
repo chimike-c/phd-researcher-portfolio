@@ -15,7 +15,7 @@ export const education = [
     degree: 'PhD, Biomedical & Chemical Engineering',
     school: 'Howard University, Washington, DC',
     years: '2024–Present',
-    detail: 'GPA 4.0/4.0 · Ernest E. Just–Percy L. Julian Graduate Research Fellow',
+    detail: 'GPA 4.0/4.0 · Graduate Research & Teaching Assistant',
   },
   {
     degree: 'Master of Engineering, Chemical Engineering',
@@ -41,33 +41,56 @@ export const developmentPrograms = [
   },
 ]
 
-export const honors = [
+// Shown together in the About section: honors, training, and affiliations.
+export const recognition = [
   {
-    kind: 'honor' as const,
-    title: 'Ernest E. Just–Percy L. Julian Graduate Research Fellowship',
-    organization: 'Howard University',
-    years: '2024–Present',
+    group: 'Honors',
+    items: [
+      {
+        title: 'Ernest E. Just–Percy L. Julian Graduate Research Fellowship',
+        detail: 'Howard University',
+        years: '2024–Present',
+      },
+    ],
   },
   {
-    kind: 'affiliation' as const,
-    title: 'Tau Beta Pi Engineering Honor Society',
-    organization: 'Member',
-    years: '2026',
+    group: 'Training & Certifications',
+    items: [
+      ...developmentPrograms.map((d) => ({
+        title: d.title,
+        detail: d.organization,
+        years: d.years,
+      })),
+      { title: 'Six Sigma Yellow Belt', detail: 'Certification', years: null as string | null },
+      {
+        title: 'Data Analyst Nanodegree',
+        detail: 'ALX–Udacity',
+        years: null as string | null,
+      },
+    ],
   },
   {
-    kind: 'affiliation' as const,
-    title: 'Nigerian Society of Chemical Engineers',
-    organization: 'Member',
-    years: null,
+    group: 'Professional Affiliations',
+    items: [
+      {
+        title: 'Tau Beta Pi Engineering Honor Society',
+        detail: 'Member',
+        years: '2026' as string | null,
+      },
+      {
+        title: 'Nigerian Society of Chemical Engineers',
+        detail: 'Member',
+        years: null as string | null,
+      },
+    ],
   },
 ]
 
 export const navItems = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/#about' },
-  { label: 'Research', href: '/#research' },
+  { label: 'Research', href: '/research' },
   { label: 'Teaching', href: '/teaching' },
-  { label: 'Service & Leadership', href: '/#service' },
-  { label: 'Development & Honors', href: '/#development' },
+  { label: 'Service & Leadership', href: '/service' },
   { label: 'CV', href: '/#cv' },
 ]

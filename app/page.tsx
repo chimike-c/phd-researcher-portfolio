@@ -4,7 +4,6 @@ import { SiteFooter } from '@/components/site-footer'
 import {
   AboutSection,
   CvSection,
-  DevelopmentSection,
   LookingAhead,
   PillarsSection,
 } from '@/components/portfolio-sections'
@@ -18,7 +17,6 @@ export default function Page() {
         <PillarsSection />
         <LookingAhead />
         <AboutSection />
-        <DevelopmentSection />
         <CvSection />
       </main>
       <SiteFooter />

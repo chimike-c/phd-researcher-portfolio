@@ -11,7 +11,7 @@ import {
   Users,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { developmentPrograms, education, honors, profile } from '@/lib/profile'
+import { education, profile, recognition } from '@/lib/profile'
 
 type Pillar = {
   id: string
@@ -32,6 +32,7 @@ const pillars: Pillar[] = [
     description:
       'My research focuses on developing sustainable processes and separation technologies for the recovery and utilization of valuable materials from agricultural biomass. I combine experimental research, process development, and data analysis to explore resource-efficient engineering solutions.',
     linkLabel: 'Explore Research',
+    href: '/research',
   },
   {
     id: 'teaching',
@@ -51,6 +52,7 @@ const pillars: Pillar[] = [
     description:
       'I believe engineering expertise should extend beyond research and the classroom. Through educational leadership, mentorship, professional engagement, and my work with Beta-Learning, I contribute to initiatives that expand learning opportunities and support student and community development.',
     linkLabel: 'Explore Service',
+    href: '/service',
   },
 ]
 
@@ -140,6 +142,12 @@ export function AboutSection() {
             development.
           </p>
           <p className="text-pretty">
+            Before my PhD, I worked in manufacturing and technology roles where I led process
+            improvement, safety, and analytics projects, including plant improvements that
+            reduced process waste by about 7%. That experience shapes how I approach research:
+            with an eye on practical, scalable solutions.
+          </p>
+          <p className="text-pretty">
             My broader interests include process optimization, engineering education, and
             translating research into practical applications.
           </p>
@@ -157,92 +165,56 @@ export function AboutSection() {
               </li>
             ))}
           </ol>
-        </div>
-      </div>
-    </section>
-  )
-}
 
-export function DevelopmentSection() {
-  return (
-    <section
-      id="development"
-      aria-labelledby="development-heading"
-      className="scroll-mt-20 border-t border-border"
-    >
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-          Growth &amp; Recognition
-        </p>
-        <h2
-          id="development-heading"
-          className="mt-2 font-serif text-3xl font-semibold text-primary md:text-4xl"
-        >
-          Professional Development &amp; Honors
-        </h2>
-        <p className="mt-4 max-w-3xl leading-relaxed text-muted-foreground">
-          Training, recognition, and professional memberships that reflect my preparation for a
-          career in research, industry, and higher education.
-        </p>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <article className="flex flex-col rounded-xl border border-border bg-card p-7">
-            <div className="flex items-center gap-3">
-              <span className="flex size-10 items-center justify-center rounded-md bg-accent text-primary">
-                <Sprout className="size-5" aria-hidden="true" />
-              </span>
-              <h3 className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
-                Professional Development
-              </h3>
-            </div>
-            <ul className="mt-6 flex flex-col divide-y divide-border">
-              {developmentPrograms.map((item) => (
-                <li key={item.title} className="py-4 first:pt-0 last:pb-0">
-                  <p className="font-serif text-lg leading-snug font-semibold text-primary">
-                    {item.title}
-                  </p>
-                  <p className="mt-1 text-sm text-foreground">
-                    {item.organization} · {item.years}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {item.detail}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="flex flex-col rounded-xl border border-border bg-card p-7">
-            <div className="flex items-center gap-3">
-              <span className="flex size-10 items-center justify-center rounded-md bg-accent text-primary">
-                <Award className="size-5" aria-hidden="true" />
-              </span>
-              <h3 className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
-                Honors &amp; Professional Affiliations
-              </h3>
-            </div>
-            <ul className="mt-6 flex flex-col divide-y divide-border">
-              {honors.map((item) => {
-                const Icon = item.kind === 'honor' ? Award : BadgeCheck
+          <div className="mt-6">
+            <h3 className="font-serif text-2xl font-semibold text-primary">
+              Honors, Training &amp; Affiliations
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
+              Recognition and training that reflect my preparation for a career in research,
+              industry, and higher education.
+            </p>
+            <div className="mt-6 flex flex-col gap-8">
+              {recognition.map((group) => {
+                const Icon =
+                  group.group === 'Honors'
+                    ? Award
+                    : group.group === 'Training & Certifications'
+                      ? Sprout
+                      : BadgeCheck
                 return (
-                  <li key={item.title} className="flex gap-3 py-4 first:pt-0 last:pb-0">
-                    <Icon className="mt-1 size-4 shrink-0 text-primary" aria-hidden="true" />
-                    <div className="flex flex-1 flex-col gap-1 sm:flex-row sm:justify-between sm:gap-4">
-                      <div>
-                        <p className="font-medium leading-snug text-foreground">{item.title}</p>
-                        <p className="text-sm text-muted-foreground">{item.organization}</p>
-                      </div>
-                      {item.years ? (
-                        <span className="shrink-0 text-sm font-medium text-muted-foreground">
-                          {item.years}
-                        </span>
-                      ) : null}
+                  <div key={group.group}>
+                    <div className="flex items-center gap-2">
+                      <Icon className="size-4 text-primary" aria-hidden="true" />
+                      <h4 className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
+                        {group.group}
+                      </h4>
                     </div>
-                  </li>
+                    <ul className="mt-3 flex flex-col divide-y divide-border border-y border-border">
+                      {group.items.map((item) => (
+                        <li
+                          key={item.title}
+                          className="flex flex-col gap-1 py-4 sm:flex-row sm:justify-between sm:gap-6"
+                        >
+                          <div>
+                            <p className="text-base leading-snug font-medium text-foreground">
+                              {item.title}
+                            </p>
+                            <p className="text-sm text-muted-foreground">{item.detail}</p>
+                          </div>
+                          {item.years ? (
+                            <span className="shrink-0 text-sm font-medium text-muted-foreground">
+                              {item.years}
+                            </span>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )
               })}
-            </ul>
-          </article>
+            </div>
+          </div>
         </div>
       </div>
     </section>
